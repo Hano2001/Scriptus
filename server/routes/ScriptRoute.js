@@ -1,8 +1,7 @@
 const express = require("express");
-
-const { uploadScript } = require("../controllers/scriptController");
+const { uploadScript, getScripts } = require("../controllers/scriptController");
 
 const router = express.Router();
 
-router.route("/").post(uploadScript);
+router.route("/").get(getScripts).post(uploadScript);
 module.exports = router;

@@ -3,6 +3,7 @@ require("dotenv").config();
 var express = require("express");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 5000;
+
 const db = process.env.DATABASE.replace(
   "<PASSWORD>",
   process.env.DATABASE_PASSWORD
