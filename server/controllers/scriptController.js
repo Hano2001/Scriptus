@@ -21,33 +21,58 @@ exports.getScripts = async (req, res) => {
 };
 
 exports.uploadScript = async (req, res) => {
-  //const formInputData = JSON.parse(req.body.title);
+  const title = JSON.parse(req.body.title);
 
   //const logger = req.body.title;
-  console.log(req.body);
+  //console.log(formInputData);
 
-  // try {
-  //   //const imageData = await uploadToCloudinary(file, 'images');
-  //   const scriptExists = await Product.exists({
-  //     title: formInputData.title,
-  //   });
-  //   if (scriptExists) {
-  //     throw Error("Script already exists");
-  //   } else {
-  //     const deployedData = formInputData;
-  //     // deployedData.pdf = imageData.url;
-  //     const newScript = await Script.create(deployedData);
-  //     res.status(201).json({
-  //       status: "success",
-  //       data: {
-  //         newScript,
-  //       },
-  //     });
-  //   }
-  // } catch (error) {
-  //   res.status(400).json({
-  //     status: "fail",
-  //     message: error.message,
-  //   });
-  // }
+  try {
+    const scriptExists = await Script.exists({
+      title: title,
+    });
+    if (scriptExists) {
+      throw Error("Script already exists");
+    } else {
+      const deployedData = { title: title, pdf: req.file };
+
+      const newScript = await Script.create(deployedData);
+      res.status(201).json({
+        status: "success",
+        data: {
+          newScript,
+        },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
 };
+
+// try {
+//   //const imageData = await uploadToCloudinary(file, 'images');
+//   const scriptExists = await Product.exists({
+//     title: formInputData.title,
+//   });
+//   if (scriptExists) {
+//     throw Error("Script already exists");
+//   } else {
+//     const deployedData = formInputData;
+//     // deployedData.pdf = imageData.url;
+//     const newScript = await Script.create(deployedData);
+//     res.status(201).json({
+//       status: "success",
+//       data: {
+//         newScript,
+//       },
+//     });
+//   }
+// } catch (error) {
+//   res.status(400).json({
+//     status: "fail",
+//     message: error.message,
+//   });
+// }

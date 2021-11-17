@@ -5,8 +5,8 @@ const ScriptSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    content: {
-      type: String,
+    pdf: {
+      type: Buffer,
       required: true,
     },
   },

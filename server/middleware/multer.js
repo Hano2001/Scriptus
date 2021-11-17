@@ -16,7 +16,7 @@ const multerUploads = multer({
     }
     return cb(undefined, true);
   },
-}).single("image");
+}).single("file");
 
 // DataURI
 const parser = new DatauriParser();
