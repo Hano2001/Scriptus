@@ -11,8 +11,8 @@ const multerUploads = multer({
     fileSize: 1000000,
   },
   fileFilter(_req, file, cb) {
-    if (!file.originalname.match(/\.(pdf)$/)) {
-      return cb(new Error("Please upload an pdf"));
+    if (file.mimetype != "application/pdf") {
+      return cb(new Error("Please upload a pdf"));
     }
     return cb(undefined, true);
   },

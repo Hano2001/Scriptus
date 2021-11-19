@@ -6,11 +6,12 @@ const ScriptSchema = new mongoose.Schema(
       required: true,
     },
     pdf: {
-      type: Buffer,
+      type: Array,
       required: true,
     },
   },
-  { collection: "scripts" }
+  { collection: "scripts" },
+  { typeKey: "$type" }
 );
 
 module.exports = mongoose.model("Script", ScriptSchema);
