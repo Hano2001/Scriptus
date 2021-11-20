@@ -57,9 +57,7 @@ exports.getSingleScript = async (req, res) => {
 
   try {
     const script = await Script.findById(id);
-    const newString = script.pdf[0].split("base64,").pop();
-    let pdfTest = Buffer.from(newString, "base64");
-    console.log(pdfTest);
+
     res.status(200).json({
       status: "success",
       data: {

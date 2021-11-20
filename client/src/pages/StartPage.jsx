@@ -1,4 +1,5 @@
 import React,{useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -21,9 +22,8 @@ export default function StartPage() {
             <div>
             
                 <div>
-                <p>ID: {script._id}</p>
-                <p>TITLE: {script.title}</p>
-                <p>SCRIPT: {script.content}</p>
+                <Link to={`/scripts/${script._id}`}>{script.title}</Link>
+                
                 </div>
            
             </div>

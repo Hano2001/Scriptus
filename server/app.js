@@ -9,6 +9,7 @@ app.use(
   })
 );
 const ScriptRoute = require("./routes/ScriptRoute");
+const UserRoute = require("./routes/UserRoute");
 app.use(
   cors({
     origin: process.env.CLIENT,
@@ -18,5 +19,6 @@ app.use(
 );
 app.use(express.json());
 app.use("/scripts", ScriptRoute);
+app.use("/users", UserRoute);
 
 module.exports = app;
