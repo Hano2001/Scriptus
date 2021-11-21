@@ -1,22 +1,54 @@
 const User = require("../models/users");
+const bcrypt = require("bcrypt");
+const JWT = require("jsonwebtoken");
+
+const signToken = (userID) => {
+  return JWT.sign(
+    {
+      iss: "Scriptus",
+      sub: userID,
+    },
+    "Scriptus",
+    { expiresIn: "5h" }
+  );
+};
+
+// async function passwordHash(password) {
+//   await bcrypt.hash(password, 10, (err, passwordHash) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(passwordHash);
+//       password = passwordHash;
+//       return passwordHash;
+//     }
+//   });
+// }
 
 exports.registerUser = async (req, res) => {
-  const data = req.body;
-  console.log(data);
+  const { email, username, password } = req.body;
 
   try {
     const userExists = await User.exists({
-      username: data.username,
+      username: username,
     });
     if (userExists) {
       throw Error("That username already exists");
     } else {
-      const newUser = await User.create(data);
-      res.status(201).json({
-        status: "success",
-        data: {
-          newUser,
-        },
+      bcrypt.hash(password, 10, function (error, hash) {
+        const newPassword = hash;
+        const newUser = User.create({
+          email: email,
+          username: username,
+          password: newPassword,
+        });
+
+        res.status(201).json({
+          status: "success",
+          data: {
+            newUser,
+          },
+        });
       });
     }
   } catch (error) {
@@ -25,5 +57,14 @@ exports.registerUser = async (req, res) => {
       status: "fail",
       message: error.message,
     });
+  }
+};
+
+exports.userLogin = async (req, res) => {
+  if (req.isAuthenticated()) {
+    const { _id, username } = req.user;
+    const token = signToken(_id);
+    res.cookie("access_token", token, { httpOnly: true, sameSite: true });
+    res.status(200).json({ isAuthenticated: true, user: { username } });
   }
 };

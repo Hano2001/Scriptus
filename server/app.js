@@ -1,13 +1,16 @@
 require("dotenv").config();
 var express = require("express");
 const cors = require("cors");
+const passport = require("passport");
 
 var app = express();
+app.use(passport.initialize());
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
+
 const ScriptRoute = require("./routes/ScriptRoute");
 const UserRoute = require("./routes/UserRoute");
 app.use(
