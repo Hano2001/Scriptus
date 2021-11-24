@@ -8,8 +8,25 @@ background-color: orange;
 `
 
 export default function Navbar({login}) {
+
+    
     console.log(login);
-    const links = [
+    const guestLinks = [
+        {
+            path: '/',
+            name: 'Home',
+          },
+          {
+            path: '/register',
+            name: 'Register',
+          },
+          {
+            path: '/login',
+            name: 'Login',
+          },
+          
+    ]
+    const userLinks = [
         {
             path: '/',
             name: 'Home',
@@ -20,25 +37,11 @@ export default function Navbar({login}) {
           },
           
     ]
-    const links2 = [
-        {
-            path: '/',
-            name: 'HEM',
-          },
-          {
-            path: '/upload',
-            name: 'Upload Scriptett',
-          },
-          
-    ]
-    let linkArray = [];
+    let linkArray = guestLinks;
     if(login){
-        linkArray = links2;
+        linkArray = userLinks;
     }
 
-    else{
-        linkArray = links;
-    }
     return (
         <div>
           <StyledNav>

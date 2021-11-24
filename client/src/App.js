@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 // import { Route } from "react-router-dom";
-import { Switch, Route } from "react-router";
+import { Switch, Route, withRouter } from "react-router";
 import "./App.css";
 import Navbar from "./components/Navbar";
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ScriptDetail from "./pages/ScriptDetail";
@@ -12,7 +13,7 @@ import UploadScript from "./pages/UploadScript";
 
 function App() {
   const [login, setLogin] = useState(false);
-
+  let url = window.location.pathname;
   const checkLogin = async () => {
     const { data } = await axios.get("http://localhost:5000/auth/checklogin");
     if (data === true) {
@@ -22,7 +23,7 @@ function App() {
 
   useEffect(() => {
     checkLogin();
-  }, []);
+  }, [url]);
   return (
     <div>
       <Navbar login={login} />
@@ -38,4 +39,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

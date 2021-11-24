@@ -13,14 +13,6 @@ const cookieExtractor = (req) => {
   return token;
 };
 
-// const jwtOptions = {
-//   // Telling Passport to check authorization headers for JWT
-//   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt"),
-//   // Telling Passport where to find the secret
-//   secretOrKey: "Scriptus",
-//   passReqToCallback: true, //<= Important, so that the verify function can accept the req param ie verify(req,payload,done)
-// };
-
 passport.use(
   new JwtStrategy(
     {

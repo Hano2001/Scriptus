@@ -11,12 +11,15 @@ const router = express.Router();
 
 router.route("/register").post(registerUser);
 
-router
-  .route("/login")
-  .post(passport.authenticate("local", { session: false }), userLogin);
+router.route("/login").post(
+  passport.authenticate("local", {
+    session: false,
+  }),
+  userLogin
+);
 
 router
   .route("/logout")
-  .post(passport.authenticate("jwt", { session: false }), userLogout);
+  .get(passport.authenticate("jwt", { session: false }), userLogout);
 
 module.exports = router;

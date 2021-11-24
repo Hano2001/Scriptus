@@ -3,7 +3,9 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 
+
 export default function Login() {
+
 const history = useHistory();
     async function userLogin(e){
         e.preventDefault();
@@ -12,14 +14,16 @@ const history = useHistory();
             password:e.target.password.value
         }
         
-       const res= await axios({
+       //const res= 
+      const res = await axios({
             url: `http://localhost:5000/users/login`,
             method: 'POST',
             withCredentials:true,
             data: payLoad,
         });
         if(res && res.status === 200){
-            history.push("/")
+        
+            history.push("/");
         }
     }
     return (

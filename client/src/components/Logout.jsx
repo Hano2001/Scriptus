@@ -8,7 +8,7 @@ export default function Logout() {
 const history = useHistory();
 
 function logoutUser(){
-    axios.post(`http://localhost:5000/users/logout`).then(history.push("/"));
+    axios.get(`http://localhost:5000/users/logout`).then(history.push("/"));
 }
   
   return(

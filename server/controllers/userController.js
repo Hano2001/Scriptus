@@ -52,19 +52,11 @@ exports.registerUser = async (req, res) => {
 exports.userLogin = async (req, res) => {
   if (req.isAuthenticated()) {
     const { _id, username } = req.user;
-    // passport.serializeUser((user, done) => {
-    //   done(null, user.id);
-    // });
 
-    // passport.deserializeUser((id, done) => {
-    //   User.findById(id, (error, user) => {
-    //     done(error, user);
-    //   });
-    // });
-    console.log(req);
     const token = signToken(_id);
     res.cookie("access_token", token, { httpOnly: true, sameSite: true });
     res.status(200).json({ isAuthenticated: true, user: { username } });
+    //return res.redirect("/");
   }
 };
 exports.userLogout = async (req, res) => {
