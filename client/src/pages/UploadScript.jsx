@@ -7,6 +7,7 @@ export default function UploadScript() {
 
     async function addScript(e){
     e.preventDefault();
+    console.log(document.cookie);
     // setTitleData(e.target.title.value);
     // setFileData(e.target.file.files[0]);
     // const payLoad = {

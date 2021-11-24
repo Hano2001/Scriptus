@@ -1,6 +1,7 @@
 const User = require("../models/users");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
+const passport = require("passport");
 
 const signToken = (userID) => {
   return JWT.sign(
@@ -12,18 +13,6 @@ const signToken = (userID) => {
     { expiresIn: "5h" }
   );
 };
-
-// async function passwordHash(password) {
-//   await bcrypt.hash(password, 10, (err, passwordHash) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log(passwordHash);
-//       password = passwordHash;
-//       return passwordHash;
-//     }
-//   });
-// }
 
 exports.registerUser = async (req, res) => {
   const { email, username, password } = req.body;
@@ -63,8 +52,22 @@ exports.registerUser = async (req, res) => {
 exports.userLogin = async (req, res) => {
   if (req.isAuthenticated()) {
     const { _id, username } = req.user;
+    // passport.serializeUser((user, done) => {
+    //   done(null, user.id);
+    // });
+
+    // passport.deserializeUser((id, done) => {
+    //   User.findById(id, (error, user) => {
+    //     done(error, user);
+    //   });
+    // });
+    console.log(req);
     const token = signToken(_id);
     res.cookie("access_token", token, { httpOnly: true, sameSite: true });
     res.status(200).json({ isAuthenticated: true, user: { username } });
   }
+};
+exports.userLogout = async (req, res) => {
+  res.clearCookie("access_token");
+  res.json({ user: { username: "" }, success: true });
 };

@@ -9,6 +9,11 @@ const ScriptSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { collection: "scripts" },
   { typeKey: "$type" }

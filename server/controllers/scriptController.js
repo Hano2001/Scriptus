@@ -1,12 +1,15 @@
 const Script = require("../models/scripts");
+const jwt_decode = require("jwt-decode");
 const { multerUploads, dataUri } = require("../middleware/multer");
-// const { uploadMiddleware } = require("../middleware/gridfs");
-const upload = require("../middleware/upload");
-const base64 = require("base64topdf");
 
 exports.getScripts = async (req, res) => {
+  if (req.cookies.access_token) {
+    console.log("COOKIE!");
+  } else {
+    console.log("NO COOKIE");
+  }
   try {
-    const scripts = await Script.find();
+    const scripts = await Script.find().populate("user");
     res.status(200).json({
       status: "success",
       data: {
@@ -25,6 +28,8 @@ exports.uploadScript = async (req, res) => {
   const title = JSON.parse(req.body.title);
   const file = dataUri(req).content;
   const pdfArray = [file];
+  const jwtCookie = jwt_decode(req.cookies.access_token);
+  const userId = jwtCookie.sub;
 
   try {
     const scriptExists = await Script.exists({
@@ -33,7 +38,7 @@ exports.uploadScript = async (req, res) => {
     if (scriptExists) {
       throw Error("Script already exists");
     } else {
-      const deployedData = { title: title, pdf: pdfArray };
+      const deployedData = { title: title, pdf: pdfArray, user: userId };
 
       const newScript = await Script.create(deployedData);
       res.status(201).json({

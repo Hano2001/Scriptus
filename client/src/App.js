@@ -1,7 +1,9 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 // import { Route } from "react-router-dom";
 import { Switch, Route } from "react-router";
 import "./App.css";
+import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ScriptDetail from "./pages/ScriptDetail";
@@ -9,8 +11,21 @@ import StartPage from "./pages/StartPage";
 import UploadScript from "./pages/UploadScript";
 
 function App() {
+  const [login, setLogin] = useState(false);
+
+  const checkLogin = async () => {
+    const { data } = await axios.get("http://localhost:5000/auth/checklogin");
+    if (data === true) {
+      setLogin(true);
+    }
+  };
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
   return (
     <div>
+      <Navbar login={login} />
       <Switch>
         <Route exact path="/" component={StartPage} />
         <Route path="/register" component={Register} />
