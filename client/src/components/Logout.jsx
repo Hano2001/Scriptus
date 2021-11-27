@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 axios.defaults.withCredentials = true;
@@ -7,17 +7,21 @@ axios.defaults.withCredentials = true;
 export default function Logout() {
 const history = useHistory();
 
+setTimeout(function(url) {
+  window.location.replace(url);
+}, 3000);
+
 function logoutUser(){
-    axios.get(`http://localhost:5000/users/logout`).then(history.push("/"));
+    axios.get(`http://localhost:5000/users/logout`).then(setTimeout("/home"));
 }
+
+useEffect(() => {
+  logoutUser();
+}, []);
   
   return(
       <div>
-          <button onClick={logoutUser}>
-            <span type="button" className="nav-link ml-2">
-              Log out
-            </span>
-          </button>
+          <h5>Youre logging out</h5>
       </div>
   )
 }

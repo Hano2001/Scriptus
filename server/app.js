@@ -16,6 +16,8 @@ app.use(
 const ScriptRoute = require("./routes/ScriptRoute");
 const UserRoute = require("./routes/UserRoute");
 const AuthRoute = require("./routes/AuthRoute");
+const CleanupRoute = require("./routes/CleanupRoute");
+
 app.use(
   cors({
     origin: process.env.CLIENT,
@@ -27,5 +29,6 @@ app.use(express.json());
 app.use("/scripts", ScriptRoute);
 app.use("/users", UserRoute);
 app.use("/auth", AuthRoute);
+app.use("/cleanup", CleanupRoute);
 
 module.exports = app;

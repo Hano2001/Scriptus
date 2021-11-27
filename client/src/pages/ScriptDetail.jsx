@@ -7,12 +7,17 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 export default function ScriptDetail(props) {
     const [numPages, setNumPages] = useState(null);
     const [scriptData, setScriptData] = useState();
+    const[results, setResults] = useState(null);
     const scriptId = props.match.params.id;
 
    async function getData(){
     const {data} = await axios.get(`http://localhost:5000/scripts/${scriptId}`);
     console.log(data.data.script.pdf);
     const pdfData = data.data.script.pdf[0];
+    
+
+    
+    
    
 
     setScriptData(pdfData);
@@ -25,7 +30,7 @@ export default function ScriptDetail(props) {
    
    async function phrase(e){
      e.preventDefault();
-    let param = e.target.phrase.value.toLowerCase();
+    let params = e.target.phrase.value.toLowerCase();
     let counter = 0;
     const {data} = await axios.get(`http://localhost:5000/scripts/gettext/${scriptId}`);
     const words = data.data.text;
@@ -35,30 +40,36 @@ export default function ScriptDetail(props) {
     
     for(let i = 0; i < lowerCase.length; i++){
       
-      if(lowerCase[i]=== param){
+      if(lowerCase[i]=== params){
         counter +=1
       }
       
       }
-     
-    
-    
-  console.log(counter);
-  }
-    
-    
-    
+      console.log(counter);
+
+      setResults(`The word "${params}" is used ${counter} times in this script!`);
+      }
+
+      function showResults(parameter){
+        return(<div>
+          <h3>{parameter}</h3>
+        </div>)
+      }
+  
+
     useEffect(() => {
         getData()
 
     }, []);
     
     
+    
     return (
         <div>
             <h3>Script Detail</h3>
+            <div>{results ? showResults(results) : null}</div>
             <form onSubmit={phrase}>
-              <label htmlFor="phrase">Search for phrase in move</label>
+              <label htmlFor="phrase">Search for a word in the script: </label>
               <input type="text" name="phrase" id="phrase" />
             <button type="submit">Search</button>
             </form>

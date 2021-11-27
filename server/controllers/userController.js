@@ -1,7 +1,8 @@
 const User = require("../models/users");
+const Script = require("../models/scripts");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
-const passport = require("passport");
+const jwt_decode = require("jwt-decode");
 
 const signToken = (userID) => {
   return JWT.sign(
@@ -56,10 +57,45 @@ exports.userLogin = async (req, res) => {
     const token = signToken(_id);
     res.cookie("access_token", token, { httpOnly: true, sameSite: true });
     res.status(200).json({ isAuthenticated: true, user: { username } });
-    //return res.redirect("/");
   }
 };
 exports.userLogout = async (req, res) => {
   res.clearCookie("access_token");
   res.json({ user: { username: "" }, success: true });
+};
+
+exports.getUserData = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const user = await User.findById(id);
+    const scripts = await Script.find({ user: id });
+
+    if (req.cookies.access_token) {
+      const jwtCookie = jwt_decode(req.cookies.access_token);
+      const onlineUser = jwtCookie.sub;
+      data = {
+        user,
+        scripts,
+        onlineUser,
+      };
+    } else {
+      data = {
+        user,
+        scripts,
+      };
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        data,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
 };

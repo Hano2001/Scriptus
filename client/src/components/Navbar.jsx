@@ -9,11 +9,9 @@ background-color: orange;
 
 export default function Navbar({login}) {
 
-    
-    console.log(login);
     const guestLinks = [
         {
-            path: '/',
+            path: '/home',
             name: 'Home',
           },
           {
@@ -28,12 +26,16 @@ export default function Navbar({login}) {
     ]
     const userLinks = [
         {
-            path: '/',
+            path: '/home',
             name: 'Home',
           },
           {
             path: '/upload',
             name: 'Upload Script',
+          },
+          {
+            path: '/logout',
+            name: 'Logout',
           },
           
     ]
@@ -55,7 +57,7 @@ export default function Navbar({login}) {
         </Link>
       ))}
       
-          <Logout/>
+          
         
     </StyledNav>   
         </div>

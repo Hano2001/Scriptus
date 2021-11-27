@@ -1,4 +1,4 @@
-exports.checkLogin = async (req, res) => {
+exports.pdfCleanup = async (req, res) => {
   if (req.cookies.access_token) {
     res.send(true);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory,Link } from 'react-router-dom';
 
 
 
@@ -23,7 +23,7 @@ const history = useHistory();
         });
         if(res && res.status === 200){
         
-            history.push("/");
+            history.push("/home");
         }
     }
     return (
@@ -35,6 +35,9 @@ const history = useHistory();
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="password"/>
                 <button type="submit">Submit</button>
+                <p>Lacking a Scriptus account? Sign up below!</p>
+                <Link to="/register">Create an account</Link>
+
             </form>
         </div>
     )
