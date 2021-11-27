@@ -35,7 +35,8 @@ export default function ScriptDetail(props) {
     const {data} = await axios.get(`http://localhost:5000/scripts/gettext/${scriptId}`);
     const words = data.data.text;
     const trimWords = words.replace(/\s+/g, ' ').trim();
-    const wordsarray = trimWords.split(" ");
+    const splitChar = /[,.!?-\s]+/;
+    const wordsarray = trimWords.split(splitChar)
     const lowerCase = wordsarray.map(word => word.toLowerCase());
     
     for(let i = 0; i < lowerCase.length; i++){
