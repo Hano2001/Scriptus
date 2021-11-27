@@ -12,7 +12,6 @@ import ScriptDetail from "./pages/ScriptDetail";
 import StartPage from "./pages/StartPage";
 import UploadScript from "./pages/UploadScript";
 import UserPage from "./pages/UserPage";
-import { pdfCleanup } from "./utilities/pdfCleanup";
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -24,25 +23,26 @@ function App() {
       setLogin(true);
     }
   };
-  function pdfCleanup() {
-    console.log("Cleanup");
-  }
-  useEffect(() => {
-    history.push("/home");
-  }, []);
+
+  // useEffect(() => {
+  //   history.push("/home");
+  // }, []);
 
   useEffect(() => {
-    checkLogin().then(pdfCleanup());
+    checkLogin();
   }, [url]);
   return (
     <div>
       <Navbar login={login} />
       <Switch>
-        <Route exact path="/home" component={StartPage} />
+        <Route exact path="/" component={StartPage} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
-        <Route path="/upload" component={UploadScript} />
+        <Route
+          path="/upload"
+          component={() => <UploadScript login={login} />}
+        />
         <Route path="/scripts/:id" component={ScriptDetail} />
         <Route path="/users/:id" component={UserPage} />
       </Switch>

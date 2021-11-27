@@ -11,7 +11,7 @@ export default function Navbar({login}) {
 
     const guestLinks = [
         {
-            path: '/home',
+            path: '/',
             name: 'Home',
           },
           {
@@ -26,7 +26,7 @@ export default function Navbar({login}) {
     ]
     const userLinks = [
         {
-            path: '/home',
+            path: '/',
             name: 'Home',
           },
           {

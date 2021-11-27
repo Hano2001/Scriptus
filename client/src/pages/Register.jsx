@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios';
+import { useHistory } from 'react-router';
 export default function Register() {
+    const history = useHistory();
 
     async function register(e){
         e.preventDefault();
@@ -10,12 +12,16 @@ export default function Register() {
             password:e.target.password.value
         }
         console.log(e.target.email.value);
-        await axios({
+        const res = await axios({
             url: `http://localhost:5000/users/register`,
             method: 'POST',
             withCredentials:true,
             data: payLoad,
         });
+        if(res && res.status === 201){
+        
+            history.push("/");
+        }
     }
     return (
         <div>

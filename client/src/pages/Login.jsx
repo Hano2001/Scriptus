@@ -1,10 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
 import { useHistory,Link } from 'react-router-dom';
 
 
 
 export default function Login() {
+const [error, setError] = useState(null);
 
 const history = useHistory();
     async function userLogin(e){
@@ -23,12 +24,23 @@ const history = useHistory();
         });
         if(res && res.status === 200){
         
-            history.push("/home");
+            history.push("/");
         }
+
+        else if(res.status === 401)
+            {setError("Invalid username and/or password!")}
+        
+    }
+
+    function showError(error){
+        return(<div>
+            <h3>{error}</h3>
+          </div>)
     }
     return (
         <div>
             <h3>LOGIN</h3>
+            <div>{error ? showError(error) : null}</div>
             <form onSubmit={userLogin}>
                 <label htmlFor="username">Username</label>
                 <input type="text" name="username" id="username"/>

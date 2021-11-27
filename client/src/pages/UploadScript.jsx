@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
 import axios from 'axios';
 
-export default function UploadScript() {
+export default function UploadScript({login}) {
     const [titleData, setTitleData] = useState();
     const [fileData, setFileData] = useState();
+    console.log(login);
 
     async function addScript(e){
     e.preventDefault();
@@ -40,12 +41,12 @@ export default function UploadScript() {
     return (
         <div>
             <h5>Upload a script here!</h5>
-            <form encType="multiform/form-data" onSubmit={addScript}>
+            {login ? <form encType="multiform/form-data" onSubmit={addScript}>
                 <label htmlFor="title">Title</label>
                 <input onChange={onChangeHandlerTitle} type="text" name="title" id="title" />
                 <input onChange={onChangeHandlerFile} type="file" name='file' id='file' />
                 <button type='submit'>SUBMIT</button>
-            </form>
+            </form> : (<h5>Please login or register an account to upload a script!</h5>)}
         </div>
     )
 }

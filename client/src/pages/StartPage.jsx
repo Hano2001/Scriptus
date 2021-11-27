@@ -38,6 +38,7 @@ export default function StartPage() {
     return (
         <div>
             <h1>SCRIPTUS</h1>
+            <Link to={`/users/61a18f40dfb8fbc8f37e996e`}>swampfool</Link>
             <div>
             {content ? content.map((item, index) => <ScriptCard script={item} key={item._id} />) : (<h5>Fetching Scripts...</h5>)}
             
