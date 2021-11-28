@@ -3,13 +3,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export default function UserPage(props) {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [user, setUser] = useState();
     const [scripts, setScripts] = useState(null);
     const [onlineUser, setOnlineUser] = useState("");
     const userId = props.match.params.id;
     
     async function fetchUser(){
-    const {data} = await axios.get(`http://localhost:5000/users/${userId}`);
+    const {data} = await axios.get(`${apiUrl}/users/${userId}`);
     console.log(data.data)
     setUser(data.data.data.user);
     
@@ -22,7 +23,7 @@ export default function UserPage(props) {
     
     function deleteScript(id){
         axios
-        .delete(`http://localhost:5000/scripts/delete/${id}`,
+        .delete(`${apiUrl}/scripts/delete/${id}`,
         {withCredentials:true})
         .then(() => {
             alert("script deleted!");

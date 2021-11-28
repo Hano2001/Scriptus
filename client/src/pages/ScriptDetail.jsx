@@ -5,13 +5,14 @@ import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
 export default function ScriptDetail(props) {
+  const apiUrl = process.env.REACT_APP_API_URL;
     const [numPages, setNumPages] = useState(null);
     const [scriptData, setScriptData] = useState();
     const[results, setResults] = useState(null);
     const scriptId = props.match.params.id;
 
    async function getData(){
-    const {data} = await axios.get(`http://localhost:5000/scripts/${scriptId}`);
+    const {data} = await axios.get(`${apiUrl}/scripts/${scriptId}`);
     console.log(data.data.script.pdf);
     const pdfData = data.data.script.pdf[0];
     
@@ -32,7 +33,7 @@ export default function ScriptDetail(props) {
      e.preventDefault();
     let params = e.target.phrase.value.toLowerCase();
     let counter = 0;
-    const {data} = await axios.get(`http://localhost:5000/scripts/gettext/${scriptId}`);
+    const {data} = await axios.get(`${apiUrl}/scripts/gettext/${scriptId}`);
     const words = data.data.text;
     const trimWords = words.replace(/\s+/g, ' ').trim();
     const splitChar = /[,.!?-\s]+/;

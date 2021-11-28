@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import axios from 'axios';
 
 export default function UploadScript({login}) {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [titleData, setTitleData] = useState();
     const [fileData, setFileData] = useState();
     console.log(login);
@@ -16,7 +17,7 @@ export default function UploadScript({login}) {
      for (var pair of deployForm.entries()) {
         console.log(pair[1]); 
     }
-      const path = `http://localhost:5000/scripts`;
+      const path = `${apiUrl}/scripts`;
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -24,10 +25,7 @@ export default function UploadScript({login}) {
       };
       axios.defaults.withCredentials = true;
       await axios.post(path, deployForm, config);
-    //   if (res && res.status === 201) {
-    //     getProducts();
-    //   }
-    // }
+    
     }
 
     function onChangeHandlerFile(e){

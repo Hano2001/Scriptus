@@ -6,6 +6,7 @@ import { useHistory,Link } from 'react-router-dom';
 
 export default function Login() {
 const [error, setError] = useState(null);
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const history = useHistory();
     async function userLogin(e){
@@ -17,7 +18,7 @@ const history = useHistory();
         
        //const res= 
       const res = await axios({
-            url: `http://localhost:5000/users/login`,
+            url: `${apiUrl}/users/login`,
             method: 'POST',
             withCredentials:true,
             data: payLoad,

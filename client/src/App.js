@@ -14,11 +14,12 @@ import UploadScript from "./pages/UploadScript";
 import UserPage from "./pages/UserPage";
 
 function App() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [login, setLogin] = useState(false);
   const history = useHistory();
   let url = window.location.pathname;
   const checkLogin = async () => {
-    const { data } = await axios.get("http://localhost:5000/auth/checklogin");
+    const { data } = await axios.get(`${apiUrl}/auth/checklogin`);
     if (data === true) {
       setLogin(true);
     }

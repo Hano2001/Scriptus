@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router';
 export default function Register() {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const history = useHistory();
 
     async function register(e){
@@ -13,7 +14,7 @@ export default function Register() {
         }
         console.log(e.target.email.value);
         const res = await axios({
-            url: `http://localhost:5000/users/register`,
+            url: `${apiUrl}/users/register`,
             method: 'POST',
             withCredentials:true,
             data: payLoad,

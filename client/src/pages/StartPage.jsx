@@ -4,6 +4,7 @@ import axios from 'axios';
 
 
 export default function StartPage() {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [content, setContent] = useState([]);
     
 
@@ -11,7 +12,7 @@ export default function StartPage() {
 
     async function getContent(){
        
-        const {data} = await axios.get('http://localhost:5000/scripts');
+        const {data} = await axios.get(`${apiUrl}/scripts`);
         await setContent(data.data.scripts);
         
     }
