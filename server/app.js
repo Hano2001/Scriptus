@@ -23,6 +23,7 @@ app.use(
     origin: process.env.CLIENT,
     methods: "GET, POST, OPTIONS, PUT, PATCH, DELETE",
     credentials: true,
+    allowedHeaders: ["Content-Type"],
   })
 );
 app.use(express.json());
