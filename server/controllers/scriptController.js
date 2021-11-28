@@ -6,7 +6,6 @@ const { pdfCleanup } = require("../middleware/pdfCleanup");
 const { TextExtract } = require("../middleware/PDFextract");
 
 exports.getScripts = async (req, res) => {
-  (res.header = "Access-Control-Allow-Origin"), "*";
   pdfCleanup();
   try {
     const scripts = await Script.find().populate("user");

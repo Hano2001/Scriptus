@@ -19,7 +19,7 @@ const AuthRoute = require("./routes/AuthRoute");
 
 app.use(
   cors({
-    origin: process.env.CLIENT,
+    origin: "*",
     methods: "GET, POST, OPTIONS, PUT, PATCH, DELETE",
     credentials: true,
     allowedHeaders: ["Content-Type"],
