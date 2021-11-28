@@ -18,6 +18,7 @@ export default function Register() {
             method: 'POST',
             withCredentials:true,
             data: payLoad,
+            headers: { 'Content-Type': 'application/json' }
         });
         if(res && res.status === 201){
         

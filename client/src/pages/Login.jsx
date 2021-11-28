@@ -21,6 +21,7 @@ const history = useHistory();
             url: `${apiUrl}/users/login`,
             method: 'POST',
             withCredentials:true,
+            headers:{"Content-Type" : "application/json"},
             data: payLoad,
         });
         if(res && res.status === 200){
