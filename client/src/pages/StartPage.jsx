@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+axios.defaults.withCredentials = true;
 
 export default function StartPage() {
     const apiUrl = process.env.REACT_APP_API_URL;
