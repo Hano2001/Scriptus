@@ -27,7 +27,7 @@ app.use(
   })
 );
 app.use(express.json());
-app.use("/scripts", ScriptRoute);
+app.use(app.options("*", cors()), "/scripts", ScriptRoute);
 app.use("/users", UserRoute);
 app.use("/auth", AuthRoute);
 app.use("/cleanup", CleanupRoute);
