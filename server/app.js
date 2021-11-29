@@ -17,13 +17,7 @@ const ScriptRoute = require("./routes/ScriptRoute");
 const UserRoute = require("./routes/UserRoute");
 const AuthRoute = require("./routes/AuthRoute");
 
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET, POST, OPTIONS, PUT, PATCH, DELETE",
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use("/scripts", ScriptRoute);
 app.use("/users", UserRoute);
