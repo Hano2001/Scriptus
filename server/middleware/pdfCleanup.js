@@ -3,7 +3,7 @@ const path = require("path");
 
 function pdfCleanup() {
   console.log("CLEANUP");
-  const directory = "middleware/tempPDF";
+  const directory = "middleware/temppdf";
 
   fs.readdir(directory, (err, files) => {
     if (err) throw err;
