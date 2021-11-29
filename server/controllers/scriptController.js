@@ -6,7 +6,7 @@ const { pdfCleanup } = require("../middleware/pdfCleanup");
 const { TextExtract } = require("../middleware/PDFextract");
 
 exports.getScripts = async (req, res) => {
-  pdfCleanup();
+  // pdfCleanup();
   try {
     const scripts = await Script.find().populate("user");
 
