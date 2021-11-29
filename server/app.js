@@ -22,7 +22,6 @@ app.use(
     origin: "*",
     methods: "GET, POST, OPTIONS, PUT, PATCH, DELETE",
     credentials: true,
-    allowedHeaders: ["Content-Type"],
   })
 );
 app.use(express.json());
