@@ -18,20 +18,16 @@ function App() {
   const [login, setLogin] = useState(false);
   const history = useHistory();
   let url = window.location.pathname;
-  const checkLogin = async () => {
-    const { data } = await axios.get(`${apiUrl}/auth/checklogin`);
-    if (data === true) {
-      setLogin(true);
-    }
-  };
+  // const checkLogin = async () => {
+  //   const { data } = await axios.get(`${apiUrl}/auth/checklogin`);
+  //   if (data === true) {
+  //     setLogin(true);
+  //   }
+  // };
 
   // useEffect(() => {
-  //   history.push("/home");
-  // }, []);
-
-  useEffect(() => {
-    checkLogin();
-  }, [url]);
+  //   checkLogin();
+  // }, [url]);
   return (
     <div>
       <Navbar login={login} />
