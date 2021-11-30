@@ -16,7 +16,7 @@ const history = useHistory();
             password:e.target.password.value
         }
         
-       //const res= 
+    
       const res = await axios({
             url: `${apiUrl}/users/login`,
             method: 'POST',
