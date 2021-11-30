@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 
 var app = express();
-app.enable("trust proxy");
+app.enable("trust proxy", 1);
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(
