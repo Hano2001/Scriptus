@@ -1,6 +1,5 @@
 const express = require("express");
 const { multerUploads } = require("../middleware/multer");
-const { pdfCleanup } = require("../middleware/pdfCleanup");
 
 const {
   uploadScript,
