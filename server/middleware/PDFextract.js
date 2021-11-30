@@ -7,14 +7,13 @@ async function TextExtract(id) {
   const script = await Script.findById(id);
   let pdfString = script.pdf[0];
   let newString = pdfString.split("base64,").pop();
-  base64.base64Decode(newString, `middleware/tempPDF/${script.title}.pdf`);
+  base64.base64Decode(newString, `middleware/${script.title}.pdf`);
+  const path = __dirname + `/${script.title}.pdf`;
 
-  const pdfFile = await fs.readFileSync(
-    __dirname + `/tempPDF/${script.title}.pdf`
-  );
+  const pdfFile = await fs.readFileSync(path);
 
-  const test = await pdfParse(pdfFile);
-  return test;
+  const pdfText = await pdfParse(pdfFile).then(fs.unlinkSync(path));
+  return pdfText;
 }
 
 module.exports = { TextExtract };
