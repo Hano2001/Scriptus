@@ -20,7 +20,7 @@ const history = useHistory();
       const res = await axios({
             url: `${apiUrl}/users/login`,
             method: 'POST',
-            withCredentials:true,
+            //withCredentials:true,
             headers:{"Content-Type" : "application/json"},
             data: payLoad,
         });
