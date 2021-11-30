@@ -1,13 +1,10 @@
 const Script = require("../models/scripts");
 const jwt_decode = require("jwt-decode");
 const { dataUri } = require("../middleware/multer");
-const { pdfCleanup } = require("../middleware/pdfCleanup");
 
 const { TextExtract } = require("../middleware/PDFextract");
 
 exports.getScripts = async (req, res) => {
-  //pdfCleanup();
-
   try {
     const scripts = await Script.find().populate("user");
 
