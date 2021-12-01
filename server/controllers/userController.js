@@ -58,7 +58,7 @@ exports.userLogin = async (req, res) => {
     res.cookie("access_token", token, {
       secure: true,
       //httpOnly: true,
-      sameSite: true,
+      //sameSite: true,
       proxy: true,
     });
     res.status(200).json({ isAuthenticated: true, user: { username } });
