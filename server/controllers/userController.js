@@ -56,7 +56,8 @@ exports.userLogin = async (req, res) => {
 
     const token = signToken(_id);
     res.cookie("access_token", token, {
-      httpOnly: true,
+      secure: true,
+      //httpOnly: true,
       sameSite: true,
       proxy: true,
     });
