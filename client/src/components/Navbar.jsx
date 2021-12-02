@@ -1,10 +1,19 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Logout from './Logout';
+
 
 const StyledNav = styled.nav`
-background-color: orange;
+display:flex;
+height:50px;
+justify-content: space-between;
+background-color: grey;
+button{
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  background-color: black;
+}
 `
 
 export default function Navbar({login}) {

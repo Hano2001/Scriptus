@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import axios from 'axios';
 import { useHistory,Link } from 'react-router-dom';
+import { StyledLogin } from '../components/styled/Styled';
 
 
 
@@ -43,16 +44,16 @@ const history = useHistory();
         <div>
             <h3>LOGIN</h3>
             <div>{error ? showError(error) : null}</div>
-            <form onSubmit={userLogin}>
-                <label htmlFor="username">Username</label>
+            <StyledLogin onSubmit={userLogin}>
+                <label htmlFor="username">Username: </label>
                 <input type="text" name="username" id="username"/>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password: </label>
                 <input type="password" name="password" id="password"/>
                 <button type="submit">Submit</button>
                 <p>Lacking a Scriptus account? Sign up below!</p>
                 <Link to="/register">Create an account</Link>
 
-            </form>
+            </StyledLogin>
         </div>
     )
 }

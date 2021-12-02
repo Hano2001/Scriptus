@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
+import { StyledForm, StyledScript, StyledMessage, MainDiv } from '../components/styled/Styled';
 
 import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
@@ -8,8 +9,9 @@ export default function ScriptDetail(props) {
   const apiUrl = process.env.REACT_APP_API_URL;
     const [numPages, setNumPages] = useState(null);
     const [scriptData, setScriptData] = useState();
-    const[results, setResults] = useState(null);
     const scriptId = props.match.params.id;
+    const[results, setResults] = useState(null);
+    const[title, setTitle] = useState(null);
 
    async function getData(){
     const {data} = await axios.get(`${apiUrl}/scripts/${scriptId}`);
@@ -20,7 +22,7 @@ export default function ScriptDetail(props) {
     
     
    
-
+    setTitle(data.data.script.title);
     setScriptData(pdfData);
    }
    
@@ -67,15 +69,21 @@ export default function ScriptDetail(props) {
     
     
     return (
-        <div>
-            <h3>Script Detail</h3>
-            <div>{results ? showResults(results) : null}</div>
+        <MainDiv>
+           
+             
+            
+            <h1>{title}</h1>
+            {results ? <StyledMessage>{showResults(results)}</StyledMessage> : null}
+            <StyledForm>
+            
             <form onSubmit={phrase}>
               <label htmlFor="phrase">Search for a word in the script: </label>
               <input type="text" name="phrase" id="phrase" />
             <button type="submit">Search</button>
             </form>
-
+            </StyledForm>
+            <StyledScript> 
             <Document file={scriptData}
             onLoadSuccess={onLoadSuccess}
             >
@@ -91,7 +99,7 @@ export default function ScriptDetail(props) {
               )
             }
                 </Document>
-
-        </div>
+            </StyledScript>
+        </MainDiv>
     )
 }

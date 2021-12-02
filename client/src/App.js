@@ -12,6 +12,7 @@ import ScriptDetail from "./pages/ScriptDetail";
 import StartPage from "./pages/StartPage";
 import UploadScript from "./pages/UploadScript";
 import UserPage from "./pages/UserPage";
+import { MainDiv } from "./components/styled/Styled";
 
 function App() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -29,7 +30,7 @@ function App() {
     checkLogin();
   }, [url]);
   return (
-    <div>
+    <MainDiv>
       <Navbar login={login} />
       <Switch>
         <Route exact path="/" component={StartPage} />
@@ -43,7 +44,7 @@ function App() {
         <Route path="/scripts/:id" component={ScriptDetail} />
         <Route path="/users/:id" component={UserPage} />
       </Switch>
-    </div>
+    </MainDiv>
   );
 }
 

@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import{ScriptCard, StyledScriptCard} from '../components/styled/Styled'
 axios.defaults.withCredentials = true;
 
 export default function StartPage() {
@@ -24,10 +25,10 @@ export default function StartPage() {
         return(
             <div>
             
-                <div>
-                <Link to={`/scripts/${script._id}`}>{script.title}</Link>
-                <p>Uploaded by:</p> <Link to={`/users/${_id}`}>{username}</Link>
-                </div>
+                <StyledScriptCard>
+                <strong><Link to={`/scripts/${script._id}`}>{script.title}</Link></strong>
+                <p>Uploaded by:</p> <strong><Link to={`/users/${_id}`}>{username}</Link></strong>
+                </StyledScriptCard>
            
             </div>
         )
