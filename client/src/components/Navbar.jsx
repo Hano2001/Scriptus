@@ -16,7 +16,8 @@ button{
 }
 `
 
-export default function Navbar({login}) {
+export default function Navbar({login,userId}) {
+  console.log(userId);
 
     const guestLinks = [
         {
@@ -42,6 +43,8 @@ export default function Navbar({login}) {
             path: '/upload',
             name: 'Upload Script',
           },
+          {path:`/users/${userId}`,
+          name:'Profile'},
           {
             path: '/logout',
             name: 'Logout',

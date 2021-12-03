@@ -17,12 +17,15 @@ import { MainDiv } from "./components/styled/Styled";
 function App() {
   const apiUrl = process.env.REACT_APP_API_URL;
   const [login, setLogin] = useState(false);
+  const [userId, setUserId] = useState("");
   const history = useHistory();
   let url = window.location.pathname;
   const checkLogin = async () => {
     const { data } = await axios.get(`${apiUrl}/auth/checklogin`);
-    if (data === true) {
+    if (data.online === true) {
       setLogin(true);
+      console.log(data.userId);
+      setUserId(data.userId);
     }
   };
 
@@ -31,7 +34,7 @@ function App() {
   }, [url]);
   return (
     <MainDiv>
-      <Navbar login={login} />
+      <Navbar login={login} userId={userId} />
       <Switch>
         <Route exact path="/" component={StartPage} />
         <Route path="/register" component={Register} />

@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
-import { StyledForm, StyledScript, StyledMessage, MainDiv } from '../components/styled/Styled';
+import { StyledForm, StyledScript, StyledMessage, MainDiv,} from '../components/styled/Styled';
 
 import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`

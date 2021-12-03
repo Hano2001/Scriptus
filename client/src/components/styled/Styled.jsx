@@ -18,6 +18,13 @@ width: 300px;
 display:flex;
 padding: 10px;
 `
+const StyledMessageFail = styled.div`
+background-color: red;
+color: white;
+width: 300px;
+display:flex;
+padding: 10px;
+`
 const StyledLogin = styled.form`
 width: 100%;
 display: grid;
@@ -43,4 +50,4 @@ background: white;
 margin: 5px;
 color: coral;
 `
-export{StyledScript,StyledForm,StyledMessage, MainDiv,StyledScriptCard, StyledLogin};
+export{StyledScript,StyledForm,StyledMessage,StyledMessageFail, MainDiv,StyledScriptCard, StyledLogin};

@@ -11,7 +11,6 @@ export default function UserPage(props) {
     
     async function fetchUser(){
     const {data} = await axios.get(`${apiUrl}/users/${userId}`);
-    console.log(data.data)
     setUser(data.data.data.user);
     
     setOnlineUser(data.data.data.onlineUser);
@@ -39,7 +38,7 @@ export default function UserPage(props) {
                
                     <div>
                     <Link to={`/scripts/${script._id}`}>{script.title}</Link>
-                    <button type="button" onClick={() => deleteScript(script._id)}>DELETE LIST</button>
+                    <button type="button" onClick={() => deleteScript(script._id)}>DELETE Script</button>
                     </div>
                 )
         }
@@ -54,9 +53,7 @@ export default function UserPage(props) {
         )
         
     }
-    function test(){
-        console.log(scripts);
-    }
+    
     
     useEffect(() => {
         fetchUser()
@@ -65,7 +62,7 @@ export default function UserPage(props) {
 
     return (
         <div>
-            <button onClick={test}> TEST</button>
+            
              {user ? <h3>{user.username}</h3> : (<h5>Fetching user...</h5>)}
              {scripts ? scripts.map((item, index) => <ScriptCard script={item} key={item._id} />) : (<h5>This user has no uploaded scripts!</h5>)}
             
